@@ -15,14 +15,14 @@ class CustomBottomNavBar extends StatelessWidget {
       builder: (context, state) {
         return ClipRRect(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.r),
-            topRight: Radius.circular(20.r)
+            topLeft: Radius.circular(30.r),
+            topRight: Radius.circular(30.r)
           ),
           child: BottomNavigationBar(
               onTap: (currentIndex) {
                 context.read<HomeCubit>().changeIndex(currentIndex);
               },
-              backgroundColor: Colors.white,
+              backgroundColor: Theme.of(context).cardColor,
               type: BottomNavigationBarType.fixed,
               selectedItemColor: Theme.of(context).primaryColor,
               unselectedItemColor: Theme.of(context).primaryColor,

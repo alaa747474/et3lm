@@ -10,8 +10,9 @@ class SubjectContainer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.circular(25.r),
-          boxShadow: [BoxShadow(color: Theme.of(context).primaryColor, spreadRadius: 1.5.r)]),
+          borderRadius: BorderRadius.circular(35.r),
+        //  boxShadow: [BoxShadow(color: Theme.of(context).primaryColor, spreadRadius: 1.5.r)]
+          ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

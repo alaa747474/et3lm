@@ -1,9 +1,9 @@
 import 'package:e_learning_app/core/router/app_router.dart';
+import 'package:e_learning_app/core/utils/service_locator.dart';
 import 'package:e_learning_app/core/utils/theme.dart';
 
 import 'package:e_learning_app/features/home/presentation/screens/home_screen.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,11 +13,12 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  setUpServiceLocator();
   runApp(const MyApp());
-  await FirebaseAuth.instance.signOut();
 }
 
 class MyApp extends StatelessWidget {

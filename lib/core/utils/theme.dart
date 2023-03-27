@@ -8,8 +8,8 @@ class AppTheme {
       disabledColor: const Color.fromARGB(255, 70, 70, 70),
       hintColor: const Color.fromARGB(255, 169, 169, 169),
       primaryColor:const Color(0xff6C63FF),
-      cardColor: const Color.fromARGB(255, 242, 242, 253),
-      scaffoldBackgroundColor: const Color.fromARGB(255, 250, 249, 255),
+      cardColor: Colors.white,
+      scaffoldBackgroundColor: const Color.fromARGB(255, 242, 242, 253),
       shadowColor: Colors.black,
       textTheme: textTheme(),
     );
