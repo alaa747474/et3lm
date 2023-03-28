@@ -6,8 +6,9 @@ class UserModel {
   final String universityId;
   final String phoneNumber;
   final String profilePic;
+  final String level;
 
-  UserModel(this.name, this.email, this.password, this.universityId, this.phoneNumber,this.profilePic);
+  UserModel(this.name, this.email, this.password, this.universityId, this.phoneNumber,this.profilePic,this.level);
 
 
   Map<String, dynamic> toJson() {
@@ -17,7 +18,8 @@ class UserModel {
       'password': password,
       'universityId': universityId,
       'phoneNumber': phoneNumber,
-      'profilePic':profilePic
+      'profilePic':profilePic,
+      'level':level
     };
   }
 
@@ -28,7 +30,8 @@ class UserModel {
       map['password'] ?? '',
       map['universityId'] ?? '',
       map['phoneNumber'] ?? '',
-      map['profilePic']
+      map['profilePic']??'',
+      map['level']??'',
     );
   }
 

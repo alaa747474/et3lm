@@ -7,6 +7,7 @@ import 'package:e_learning_app/core/widgets/loading_indicator.dart';
 import 'package:e_learning_app/features/auth/data/repository/auth_repository.dart';
 import 'package:e_learning_app/features/auth/presentation/screens/create_account_screen.dart';
 import 'package:e_learning_app/features/auth/presentation/widgets/custom_auth_text_field.dart';
+import 'package:e_learning_app/features/home/presentation/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +18,7 @@ import '../../business_logic/cubit/auth_cubit.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
-
+ static const String routeName='/sign_in_screen';
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
@@ -65,6 +66,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
                     if (state is SingInDone) {
+                      Navigator.pushReplacementNamed(context,HomeScreen.routeName);
                     }
                   },
                   builder: (context, state) {

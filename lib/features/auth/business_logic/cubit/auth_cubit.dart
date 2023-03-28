@@ -19,10 +19,11 @@ class AuthCubit extends Cubit<AuthState> {
     required String password,
     required String universityId,
     required String phoneNumber,
-    required String profilePic
+    required String profilePic,
+    required String level
   }) async {
     emit(AuthLoading());
-    UserModel user = UserModel(name, email, password, universityId, phoneNumber,profilePic);
+    UserModel user = UserModel(name, email, password, universityId, phoneNumber,profilePic,level);
     await _authRepo.createAccount(userModel: user).then((value) {
       emit(CreateAccountDone());
     });

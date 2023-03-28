@@ -1,6 +1,8 @@
 import 'package:e_learning_app/core/router/app_router.dart';
 import 'package:e_learning_app/core/utils/service_locator.dart';
 import 'package:e_learning_app/core/utils/theme.dart';
+import 'package:e_learning_app/features/auth/presentation/screens/create_account_screen.dart';
+import 'package:e_learning_app/features/auth/presentation/screens/sign_in_screen.dart';
 
 import 'package:e_learning_app/features/home/presentation/screens/home_screen.dart';
 
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Et3lm',
           theme: AppTheme.theme(),
-          initialRoute: HomeScreen.routeName,
+          initialRoute: SignInScreen.routeName,
         );
       },
     );

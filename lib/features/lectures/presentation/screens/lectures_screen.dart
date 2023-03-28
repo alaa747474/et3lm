@@ -1,3 +1,4 @@
+import 'package:e_learning_app/core/constant/constants.dart';
 import 'package:e_learning_app/core/widgets/custom_appbar.dart';
 import 'package:e_learning_app/core/widgets/loading_indicator.dart';
 import 'package:e_learning_app/features/lectures/business_logic/cubit/lectures_cubit.dart';
@@ -21,6 +22,17 @@ static const String routeName='/lectures_screen';
             return const LoadingIndicator();
           }
           if (state is LecturesLoaded) {
+            if (state.lectures.isEmpty) {
+              return Center(
+                child: Column(
+                //  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AspectRatio(aspectRatio: 15/10,child: Image.network(ConstantStrings.sadEmoji)),
+                    Text('لا توجد محاضرات الأن !',style: Theme.of(context).textTheme.labelLarge,),
+                  ],
+                ),
+              );
+            }
             return ListView.builder(
               itemCount: state.lectures.length,
               itemBuilder: (BuildContext context, int index) {

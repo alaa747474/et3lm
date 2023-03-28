@@ -5,4 +5,5 @@ class ConstantStrings{
   static const String usersCollection='users';
   static const String subjectsCollection='subjects';
   static const String lecturesCollection='lectures';
+  static const String sadEmoji='https://cdn-icons-png.flaticon.com/512/260/260181.png';
 }

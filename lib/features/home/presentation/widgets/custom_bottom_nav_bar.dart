@@ -15,9 +15,7 @@ class CustomBottomNavBar extends StatelessWidget {
       builder: (context, state) {
         return ClipRRect(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30.r),
-            topRight: Radius.circular(30.r)
-          ),
+              topLeft: Radius.circular(30.r), topRight: Radius.circular(30.r)),
           child: BottomNavigationBar(
               onTap: (currentIndex) {
                 context.read<HomeCubit>().changeIndex(currentIndex);
@@ -25,19 +23,17 @@ class CustomBottomNavBar extends StatelessWidget {
               backgroundColor: Theme.of(context).cardColor,
               type: BottomNavigationBarType.fixed,
               selectedItemColor: Theme.of(context).primaryColor,
-              unselectedItemColor: Theme.of(context).primaryColor,
+              unselectedItemColor: Theme.of(context).hintColor,
               selectedIconTheme: IconThemeData(size: 30.r),
-              unselectedIconTheme:IconThemeData(size: 30.r),
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
+              unselectedIconTheme: IconThemeData(size: 30.r),
+              showSelectedLabels: true,
+              showUnselectedLabels: true,
               currentIndex: context.read<HomeCubit>().selectedIndex,
               items: const [
+                BottomNavigationBarItem(icon: Icon(Icons.menu_book_rounded), label: 'المواد الدراسية'),
                 BottomNavigationBarItem(
-                  activeIcon: Icon(Icons.home),
-                    icon: Icon(Icons.home_outlined), label: ''),
-                BottomNavigationBarItem(
-                  activeIcon: Icon(Icons.person),
-                    icon: Icon(Icons.person_outline), label: ''),
+                    icon: Icon(Icons.question_mark), label: 'الإختبارات'),
+                BottomNavigationBarItem(icon: Icon(Icons.person), label: 'الملف الشخصي'),
               ]),
         );
       },

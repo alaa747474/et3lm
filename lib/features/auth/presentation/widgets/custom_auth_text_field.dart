@@ -18,6 +18,7 @@ class CustomAuthTextField extends StatelessWidget {
         SizedBox(height: 10.h,),
         Text(title,style: Theme.of(context).textTheme.titleLarge,),
         TextFormField(
+          
           obscureText: obscure,
           controller: controller,
           validator: validator,

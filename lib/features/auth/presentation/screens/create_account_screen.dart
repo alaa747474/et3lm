@@ -14,6 +14,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../home/presentation/screens/home_screen.dart';
+
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
   static const String routeName = '/create_account_screen';
@@ -35,7 +37,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     _nameController.dispose();
     _passwordController.dispose();
   }
-
+  dynamic level;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -101,16 +103,19 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     hintText: 'رقم الهاتف المحمول',
                     controller: _phoneController,
                     icon: Icons.phone),
+                 
                 SizedBox(height: 20.h),
                 BlocConsumer<AuthCubit, AuthState>(
-                  listener: (context, state) {},
+                  listener: (context, state) {
+                    if (state is CreateAccountDone) {
+                      Navigator.pushReplacementNamed(context,HomeScreen.routeName);
+                    }
+                  },
                   builder: (context, state) {
                     if (state is AuthLoading) {
                       return const LoadingIndicator();
                     }
-                    if (state is CreateAccountDone) {
-                      return const Text('Done');
-                    }
+                   
                     return CustomButtom(
                         onPressed: () {
                           if (state is ProfilePicUrlLoaded) {
@@ -120,7 +125,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                 password: _passwordController.text,
                                 universityId: _universityIdController.text,
                                 phoneNumber: _phoneController.text,
-                                profilePic: state.profilePicUrl);
+                                profilePic: state.profilePicUrl,
+                                level: '003'
+                                );
                           }
                         },
                         text: 'إنشاء حساب');
