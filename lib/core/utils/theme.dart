@@ -7,9 +7,9 @@ class AppTheme {
       fontFamily: 'NotoKufiArabic',
       disabledColor: const Color.fromARGB(255, 70, 70, 70),
       hintColor: const Color.fromARGB(255, 169, 169, 169),
-      primaryColor:const Color(0xff6C63FF),
+      primaryColor:const Color(0xff56a3f3),
       cardColor: Colors.white,
-      scaffoldBackgroundColor: const Color.fromARGB(255, 242, 242, 253),
+      scaffoldBackgroundColor: const Color.fromARGB(255, 224, 239, 255),
       shadowColor: Colors.black,
       textTheme: textTheme(),
     );
@@ -29,22 +29,27 @@ class AppTheme {
       ),
       labelSmall: TextStyle(
         color: Colors.black45,
-        fontWeight: FontWeight.w600,
-        fontSize: 18.sp,
+        
+        fontSize: 16.sp,
       ),
       titleLarge: TextStyle(
-        color: Colors.black,
+        color: const Color(0xff56a3f3),
         fontWeight: FontWeight.w600,
         fontSize: 16.sp,
       ),
       titleMedium: TextStyle(
         color: Colors.black,
-        fontSize: 14.sp,
+        fontSize: 16.sp,
       ),
       bodyLarge: TextStyle(
         color: Colors.white,
         fontSize: 16.sp
-      )
+      ),
+      bodyMedium: TextStyle(
+        color: Colors.grey,
+        height: 1.2.r,
+        fontSize: 13.sp
+      ),
     );
   }
 }

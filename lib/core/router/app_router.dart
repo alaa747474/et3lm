@@ -8,6 +8,8 @@ import 'package:e_learning_app/features/lectures/data/repository/lecture_reposit
 import 'package:e_learning_app/features/lectures/presentation/screens/lecture_pdf_viewr_screen.dart';
 import 'package:e_learning_app/features/lectures/presentation/screens/lecture_video_viewer_screen.dart';
 import 'package:e_learning_app/features/lectures/presentation/screens/lectures_screen.dart';
+import 'package:e_learning_app/features/quiz/data/model/quiz.dart';
+import 'package:e_learning_app/features/quiz/presentation/screens/question_screen.dart';
 import 'package:e_learning_app/features/subjects/data/model/subject.dart';
 import 'package:e_learning_app/features/subjects/presentation/screens/subjects_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,9 @@ class AppRouter {
     switch (settings.name) {
       case HomeScreen.routeName:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
+          case QuestionScreen.routeName:
+          final quiz= settings.arguments as Quiz;
+        return MaterialPageRoute(builder: (_) =>  QuestionScreen(quiz: quiz,));
       case CreateAccountScreen.routeName:
         return MaterialPageRoute(builder: (_) => const CreateAccountScreen());
         case SignInScreen.routeName:

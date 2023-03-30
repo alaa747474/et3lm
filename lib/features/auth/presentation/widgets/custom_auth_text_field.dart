@@ -22,10 +22,12 @@ class CustomAuthTextField extends StatelessWidget {
           obscureText: obscure,
           controller: controller,
           validator: validator,
+          
           cursorColor: Theme.of(context).primaryColor,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10.r),
           filled: true,
+          fillColor: Theme.of(context).cardColor,
           prefixIcon: Icon(icon,color: Theme.of(context).hintColor,),
           hintText: hintText,
           border: OutlineInputBorder(

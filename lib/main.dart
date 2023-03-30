@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Et3lm',
           theme: AppTheme.theme(),
-          initialRoute: SignInScreen.routeName,
+          initialRoute: HomeScreen.routeName,
         );
       },
     );

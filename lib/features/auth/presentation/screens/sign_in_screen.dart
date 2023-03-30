@@ -44,13 +44,12 @@ class _SignInScreenState extends State<SignInScreen> {
           SingleChildScrollView(
             child: Column(
               children: [
-                SvgPicture.asset(
+                Image.asset(
                   ConstantStrings.authImage,
-                  height: 250.h,
+                  height: 270.h,
+                 
                 ),
-                SizedBox(
-                  height: 15.h,
-                ),
+              
                 CustomAuthTextField(
                     title: 'البريد الإلكتروني',
                     hintText: 'البريد الإلكتروني',
