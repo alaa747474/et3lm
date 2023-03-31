@@ -1,7 +1,6 @@
 import 'package:e_learning_app/core/constant/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 
 class BackgroundImageWidget extends StatelessWidget {
   const BackgroundImageWidget({super.key});

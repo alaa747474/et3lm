@@ -8,6 +8,7 @@ import 'package:e_learning_app/features/lectures/data/repository/lecture_reposit
 import 'package:e_learning_app/features/lectures/presentation/screens/lecture_pdf_viewr_screen.dart';
 import 'package:e_learning_app/features/lectures/presentation/screens/lecture_video_viewer_screen.dart';
 import 'package:e_learning_app/features/lectures/presentation/screens/lectures_screen.dart';
+import 'package:e_learning_app/features/quiz/business_logic/answers_cubit/answers_cubit.dart';
 import 'package:e_learning_app/features/quiz/data/model/quiz.dart';
 import 'package:e_learning_app/features/quiz/presentation/screens/question_screen.dart';
 import 'package:e_learning_app/features/subjects/data/model/subject.dart';
@@ -20,26 +21,37 @@ class AppRouter {
     switch (settings.name) {
       case HomeScreen.routeName:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
-          case QuestionScreen.routeName:
-          final quiz= settings.arguments as Quiz;
-        return MaterialPageRoute(builder: (_) =>  QuestionScreen(quiz: quiz,));
+      case QuestionScreen.routeName:
+        final quiz = settings.arguments as Quiz;
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) =>
+                      AnswersCubit()..startTimer(quiz.time * 60),
+                  child: QuestionScreen(
+                    quiz: quiz,
+                  ),
+                ));
       case CreateAccountScreen.routeName:
         return MaterialPageRoute(builder: (_) => const CreateAccountScreen());
-        case SignInScreen.routeName:
+      case SignInScreen.routeName:
         return MaterialPageRoute(builder: (_) => const SignInScreen());
       case SubjectsScreen.routeName:
         return MaterialPageRoute(builder: (_) => const SubjectsScreen());
-         case LecturePdfViewerScreen.routeName:
-         final lecture=settings.arguments as Lecture;
-        return MaterialPageRoute(builder: (_) => LecturePdfViewerScreen(lecture: lecture));
-                 case LectureVideoViewerScreen.routeName:
-         final lecture=settings.arguments as Lecture;
-        return MaterialPageRoute(builder: (_) => LectureVideoViewerScreen(lecture: lecture));
+      case LecturePdfViewerScreen.routeName:
+        final lecture = settings.arguments as Lecture;
+        return MaterialPageRoute(
+            builder: (_) => LecturePdfViewerScreen(lecture: lecture));
+      case LectureVideoViewerScreen.routeName:
+        final lecture = settings.arguments as Lecture;
+        return MaterialPageRoute(
+            builder: (_) => LectureVideoViewerScreen(lecture: lecture));
       case LecturesScreen.routeName:
         final subject = settings.arguments as Subject;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => LecturesCubit(getIt.get<LectureRepository>())..getAllLectures(subjectName: subject.name),
+                  create: (context) =>
+                      LecturesCubit(getIt.get<LectureRepository>())
+                        ..getAllLectures(subjectName: subject.name),
                   child: LecturesScreen(
                     subject: subject,
                   ),

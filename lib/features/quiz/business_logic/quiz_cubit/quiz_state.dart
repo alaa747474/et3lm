@@ -4,20 +4,26 @@ part of 'quiz_cubit.dart';
 abstract class QuizState {}
 
 class QuizInitial extends QuizState {}
+
 class QuizzesLoaded extends QuizState {
-  final List<Quiz>quizzes;
+  final List<Quiz> quizzes;
 
   QuizzesLoaded(this.quizzes);
 }
+
 class QuizzesLoading extends QuizState {}
+
 class QuizzesFaildToLoad extends QuizState {
   final String error;
   QuizzesFaildToLoad(this.error);
 }
 
 class QuestionsLoaded extends QuizState {
-  final List<Question>questions;
+  final List<Question> questions;
 
   QuestionsLoaded(this.questions);
 }
+
 class QuestionsLoading extends QuizState {}
+
+

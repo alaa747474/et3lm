@@ -2,11 +2,12 @@ import 'package:e_learning_app/core/utils/service_locator.dart';
 import 'package:e_learning_app/core/widgets/custom_appbar.dart';
 import 'package:e_learning_app/core/widgets/error_text.dart';
 import 'package:e_learning_app/core/widgets/loading_indicator.dart';
-import 'package:e_learning_app/features/quiz/data/business_logic/cubit/quiz_cubit.dart';
 import 'package:e_learning_app/features/quiz/data/repository/quiz_repository.dart';
 import 'package:e_learning_app/features/quiz/presentation/widgets/quiz_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../business_logic/quiz_cubit/quiz_cubit.dart';
 
 class QuizScreen extends StatelessWidget {
   const QuizScreen({super.key});

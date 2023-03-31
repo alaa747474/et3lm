@@ -75,6 +75,7 @@ class QuizCard extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 5.h),
             child: CustomButtom(
                 onPressed: () {
+                  
                   Navigator.pushNamed(context, QuestionScreen.routeName,
                       arguments: quiz);
                 },

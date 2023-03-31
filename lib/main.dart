@@ -1,9 +1,6 @@
 import 'package:e_learning_app/core/router/app_router.dart';
 import 'package:e_learning_app/core/utils/service_locator.dart';
 import 'package:e_learning_app/core/utils/theme.dart';
-import 'package:e_learning_app/features/auth/presentation/screens/create_account_screen.dart';
-import 'package:e_learning_app/features/auth/presentation/screens/sign_in_screen.dart';
-
 import 'package:e_learning_app/features/home/presentation/screens/home_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
