@@ -7,6 +7,7 @@ import 'package:e_learning_app/features/quiz/presentation/widgets/quiz_card.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../business_logic/answers_cubit/answers_cubit.dart';
 import '../../business_logic/quiz_cubit/quiz_cubit.dart';
 
 class QuizScreen extends StatelessWidget {
@@ -14,10 +15,18 @@ class QuizScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(
-      create: (context) => QuizCubit(getIt.get<QuizRepository>())..getAllQuizzes(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              QuizCubit(getIt.get<QuizRepository>())..getAllQuizzes(),
+        ),
+        BlocProvider(
+          create: (context) => AnswersCubit(),
+        ),
+      ],
       child: Scaffold(
-        appBar:const CustomAppBar(text: 'الاخبارات', onPressed: null),
+        appBar: const CustomAppBar(text: 'الاخبارات', onPressed: null),
         body: BlocBuilder<QuizCubit, QuizState>(
           builder: (context, state) {
             if (state is QuizzesLoading) {
@@ -30,7 +39,9 @@ class QuizScreen extends StatelessWidget {
               return ListView.builder(
                 itemCount: state.quizzes.length,
                 itemBuilder: (BuildContext context, int index) {
-                 return  QuizCard(quiz: state.quizzes[index],);
+                  return QuizCard(
+                    quiz: state.quizzes[index],
+                  );
                 },
               );
             }

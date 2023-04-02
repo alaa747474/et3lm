@@ -23,14 +23,15 @@ class AnswerCard extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.r),
                   color: index == context.read<AnswersCubit>().selectedAnswer
-                      ? Theme.of(context).primaryColor.withOpacity(0.7)
-                      : Colors.amber),
+                      ? Theme.of(context).primaryColor
+                      : Colors.white),
               child: Center(
                 child: Text(answer,
-                    style: Theme.of(context)
+                    style: index != context.read<AnswersCubit>().selectedAnswer?Theme.of(context)
                         .textTheme
-                        .labelMedium!
-                        .copyWith(color: Colors.white)),
+                        .labelMedium:Theme.of(context)
+                        .textTheme
+                        .labelMedium!.copyWith(color: Colors.white)),
               ),
             ),
           ],

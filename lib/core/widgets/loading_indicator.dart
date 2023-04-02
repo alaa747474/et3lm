@@ -8,10 +8,8 @@ class LoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: LoadingAnimationWidget.discreteCircle(
-            color: Theme.of(context).primaryColor,
-            size: 50.r,
-            secondRingColor: Theme.of(context).primaryColor.withOpacity(0.8),
-            thirdRingColor: Theme.of(context).primaryColor.withOpacity(0.2)));
+      child: LoadingAnimationWidget.fourRotatingDots(
+          color: Theme.of(context).primaryColor, size: 70.r),
+    );
   }
 }

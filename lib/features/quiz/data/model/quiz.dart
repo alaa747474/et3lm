@@ -4,14 +4,16 @@ class Quiz {
   final String description;
   final String quizId;
   final int time;
-  Quiz(this.subjectName, this.description, this.quizId,this.time);
+  final int numberOfQuestions;
+  Quiz(this.subjectName, this.description, this.quizId,this.time,this.numberOfQuestions);
 
   Map<String, dynamic> toMap() {
     return {
       'subjectName': subjectName,
       'description': description,
       'quizId': quizId,
-      'time':time
+      'time':time,
+      'numberOfQuestions':numberOfQuestions
     };
   }
 
@@ -20,7 +22,8 @@ class Quiz {
       map['subjectName'] ?? '',
       map['description'] ?? '',
       map['quizId'] ?? '',
-      map['time']??''
+      map['time']??'',
+      map['numberOfQuestions']
     );
   }
 }

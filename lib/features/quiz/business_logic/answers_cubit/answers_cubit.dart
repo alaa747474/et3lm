@@ -11,6 +11,11 @@ class AnswersCubit extends Cubit<AnswersState> {
   int? selectedAnswer;
   final PageController controller = PageController(initialPage: 0);
   List<int>? answersList;
+  int pageViewCurrentIndex = 0;
+
+  void goToNextQuestion() {
+    controller.jumpToPage(pageViewCurrentIndex + 1);
+  }
 
   void createAnswersList(int questionsNumber) {
     answersList = List<int>.generate(questionsNumber, (i) => 0);
@@ -20,10 +25,11 @@ class AnswersCubit extends Cubit<AnswersState> {
     selectedAnswer = index;
     emit(ChangeSelectedAnswerColor());
   }
-  calculteQuizScore(){
-   var x= answersList!.fold(0, (previousValue, element) => previousValue+element);
-   print('$x of 3');
-     emit(ChangeSelectedAnswerColor());
+
+  void calculteQuizScore() {
+    var x = answersList!
+        .fold(0, (previousValue, element) => previousValue + element);
+    print('$x of ${answersList!.length}');
   }
 
   String minutesString = '00';
@@ -33,17 +39,16 @@ class AnswersCubit extends Cubit<AnswersState> {
     Duration duration = const Duration(seconds: 1);
     remainingSeconds = timeInSeconds;
     _timer = Timer.periodic(duration, (_) {
-      emit(ChangeSelectedAnswerColor());
       if (remainingSeconds == 0) {
         timerCacel();
-        emit(ChangeSelectedAnswerColor());
+        emit(QuizTimeExpired());
       } else {
         int minutes = remainingSeconds ~/ 60;
         int seconds = remainingSeconds % 60;
         minutesString = minutes.toString().padLeft(2, '0');
         secondsString = seconds.toString().padLeft(2, '0');
         remainingSeconds--;
-        emit(ChangeSelectedAnswerColor());
+        emit(QuizTimeStarts());
       }
     });
   }

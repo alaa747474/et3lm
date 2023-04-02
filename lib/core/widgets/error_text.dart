@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ErrorText extends StatelessWidget {
-  const ErrorText({super.key});
-
+  const ErrorText({super.key,this.text='حدث خطأ ما !!!'});
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        'حدث خطأ ما !!!',
+        text,
         style: Theme.of(context).textTheme.labelLarge,
       ),
     );

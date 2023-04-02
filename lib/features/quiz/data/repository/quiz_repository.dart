@@ -15,7 +15,7 @@ class QuizRepository extends BaseQuizRepository {
         .doc(quizId)
         .collection(ConstantStrings.qusetionCollection)
         .get();
-     
+
     return collection.docs.map((e) => Question.fromMap(e.data())).toList();
   }
 

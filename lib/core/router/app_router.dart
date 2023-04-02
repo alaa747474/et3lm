@@ -23,10 +23,11 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case QuestionScreen.routeName:
         final quiz = settings.arguments as Quiz;
+
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) =>
-                      AnswersCubit()..startTimer(quiz.time * 60),
+                      AnswersCubit()..startTimer(quiz.time * 60)..createAnswersList(quiz.numberOfQuestions),
                   child: QuestionScreen(
                     quiz: quiz,
                   ),

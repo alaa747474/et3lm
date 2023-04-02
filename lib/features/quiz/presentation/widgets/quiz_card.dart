@@ -66,6 +66,7 @@ class QuizCard extends StatelessWidget {
                         ),
                       ],
                     ),
+                    
                   ],
                 ),
               )
