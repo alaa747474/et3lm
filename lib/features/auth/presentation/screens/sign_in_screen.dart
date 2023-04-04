@@ -3,6 +3,7 @@ import 'package:e_learning_app/core/constant/constants.dart';
 import 'package:e_learning_app/core/utils/padding_extension.dart';
 import 'package:e_learning_app/core/widgets/custom_appbar.dart';
 import 'package:e_learning_app/core/widgets/custom_button.dart';
+import 'package:e_learning_app/core/widgets/error_text.dart';
 import 'package:e_learning_app/core/widgets/loading_indicator.dart';
 import 'package:e_learning_app/features/auth/data/repository/auth_repository.dart';
 import 'package:e_learning_app/features/auth/presentation/screens/create_account_screen.dart';
@@ -68,6 +69,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     }
                   },
                   builder: (context, state) {
+                    if (state is AuthFaild) {
+                      return ErrorText(text: state.error,);
+                    }
                     if (state is AuthLoading) {
                       return const LoadingIndicator();
                     }

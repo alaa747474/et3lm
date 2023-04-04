@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../business_logic/quiz_cubit/quiz_cubit.dart';
 
 class AnswerCard extends StatelessWidget {
   const AnswerCard({super.key, required this.answer, required this.index});

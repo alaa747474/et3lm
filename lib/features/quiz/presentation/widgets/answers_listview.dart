@@ -4,7 +4,6 @@ import 'package:e_learning_app/features/quiz/presentation/widgets/answer_card.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../business_logic/quiz_cubit/quiz_cubit.dart';
 
 class AnswersListView extends StatelessWidget {
   const AnswersListView(

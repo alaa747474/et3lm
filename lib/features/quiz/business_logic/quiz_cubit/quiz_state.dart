@@ -25,5 +25,3 @@ class QuestionsLoaded extends QuizState {
 }
 
 class QuestionsLoading extends QuizState {}
-
-

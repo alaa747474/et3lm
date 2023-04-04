@@ -22,7 +22,7 @@ class QuizScreen extends StatelessWidget {
               QuizCubit(getIt.get<QuizRepository>())..getAllQuizzes(),
         ),
         BlocProvider(
-          create: (context) => AnswersCubit(),
+          create: (context) => AnswersCubit(getIt.get<QuizRepository>()),
         ),
       ],
       child: Scaffold(
@@ -39,8 +39,12 @@ class QuizScreen extends StatelessWidget {
               return ListView.builder(
                 itemCount: state.quizzes.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return QuizCard(
-                    quiz: state.quizzes[index],
+                 bool showQuiz=  context.read<QuizCubit>().showQuiz(state.quizzes[index].startAt);
+                  return Visibility(
+                    visible:showQuiz ,
+                    child: QuizCard(
+                      quiz: state.quizzes[index],
+                    ),
                   );
                 },
               );

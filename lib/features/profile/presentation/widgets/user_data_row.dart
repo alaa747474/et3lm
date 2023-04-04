@@ -10,12 +10,13 @@ class UserDataRow extends StatelessWidget {
     return Column(
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 130.w,minWidth: 130.w),
+              constraints: BoxConstraints(maxWidth: 140.w,minWidth: 140.w),
               child: Text(title,style: Theme.of(context).textTheme.titleMedium,)),
             Text(
-              text,
+              text,style: Theme.of(context).textTheme.titleSmall,
             )
           ],
         ),

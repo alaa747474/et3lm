@@ -3,15 +3,20 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/model/quiz_score.dart';
+import '../../data/repository/quiz_repository.dart';
+
 part 'answers_state.dart';
 
 class AnswersCubit extends Cubit<AnswersState> {
-  AnswersCubit() : super(AnswersInitial());
+  AnswersCubit(this._quizRepository) : super(AnswersInitial());
   Timer? _timer;
+  double quizScore = 0;
   int? selectedAnswer;
   final PageController controller = PageController(initialPage: 0);
   List<int>? answersList;
   int pageViewCurrentIndex = 0;
+  final QuizRepository _quizRepository;
 
   void goToNextQuestion() {
     controller.jumpToPage(pageViewCurrentIndex + 1);
@@ -27,9 +32,10 @@ class AnswersCubit extends Cubit<AnswersState> {
   }
 
   void calculteQuizScore() {
-    var x = answersList!
+    quizScore = answersList!
         .fold(0, (previousValue, element) => previousValue + element);
-    print('$x of ${answersList!.length}');
+    timerCacel();
+    //  emit(QuizScoreLoaded(quizScore));
   }
 
   String minutesString = '00';
@@ -49,11 +55,29 @@ class AnswersCubit extends Cubit<AnswersState> {
         secondsString = seconds.toString().padLeft(2, '0');
         remainingSeconds--;
         emit(QuizTimeStarts());
+        if (state is QuizScoreLoaded) {
+          minutesString = '00';
+          secondsString = '00';
+        }
       }
     });
   }
 
   void timerCacel() {
     _timer?.cancel();
+    emit(QuizScoreLoaded(quizScore));
+  }
+
+  void saveQuizScoreToStudentResults(
+      {required String subjectName, required String quizId}) {
+    QuizScore quizScoreModel =
+        QuizScore(quizScore, answersList!.length, subjectName, quizId);
+    _quizRepository.saveQuizScoreToStudentResults(quizScore: quizScoreModel);
+  }
+
+  void addStudentUidToDEnteredQuizStudents(
+      {required String quizId,}) {
+    _quizRepository.addStudentUidToDEnteredQuizStudents(
+        quizId: quizId, );
   }
 }

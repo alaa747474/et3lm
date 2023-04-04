@@ -17,5 +17,9 @@ class SingInDone extends AuthState {}
 class CreateAccountDone extends AuthState {}
 class SingOutDone extends AuthState {}
 class AuthLoading extends AuthState {}
-class AuthFaild extends AuthState {}
+class AuthFaild extends AuthState {
+  final String error;
+
+  AuthFaild(this.error);
+}
 

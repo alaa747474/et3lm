@@ -1,13 +1,12 @@
+
 import 'package:e_learning_app/core/router/app_router.dart';
 import 'package:e_learning_app/core/utils/service_locator.dart';
 import 'package:e_learning_app/core/utils/theme.dart';
 import 'package:e_learning_app/features/home/presentation/screens/home_screen.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'firebase_options.dart';
 
 void main() async {
@@ -43,9 +42,10 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Et3lm',
           theme: AppTheme.theme(),
-          initialRoute: HomeScreen.routeName,
+          initialRoute:HomeScreen.routeName,
         );
       },
     );
   }
 }
+

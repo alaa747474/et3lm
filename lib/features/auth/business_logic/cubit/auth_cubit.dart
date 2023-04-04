@@ -5,6 +5,7 @@ import 'package:e_learning_app/core/service/firebase_storage_service.dart';
 import 'package:e_learning_app/core/utils/image_picker_helper.dart';
 import 'package:e_learning_app/features/auth/data/model/user_model.dart';
 import 'package:e_learning_app/features/auth/data/repository/auth_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -24,7 +25,7 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthLoading());
     UserModel user = UserModel(name, email, password, universityId, phoneNumber,profilePic,level);
-    await _authRepo.createAccount(userModel: user).then((value) {
+     _authRepo.createAccount(userModel: user).then((value) {
       emit(CreateAccountDone());
     });
   }
@@ -32,11 +33,15 @@ class AuthCubit extends Cubit<AuthState> {
   void signIn({
     required String email,
     required String password,
-  }) {
+  })async {
     emit(AuthLoading());
-    _authRepo.signIn(email: email, password: password).then((value) {
+    try {
+      await _authRepo.signIn(email: email, password: password).then((value) {
       emit(SingInDone());
     });
+    }on FirebaseAuthException catch (e) {
+      emit(AuthFaild(e.message!));
+    }
   }
 
   void signOut() async{

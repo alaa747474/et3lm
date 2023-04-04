@@ -1,6 +1,7 @@
 import 'package:e_learning_app/core/utils/service_locator.dart';
 import 'package:e_learning_app/core/widgets/custom_appbar.dart';
 import 'package:e_learning_app/core/widgets/custom_button.dart';
+import 'package:e_learning_app/core/widgets/error_text.dart';
 import 'package:e_learning_app/core/widgets/loading_indicator.dart';
 import 'package:e_learning_app/features/auth/business_logic/cubit/auth_cubit.dart';
 import 'package:e_learning_app/features/auth/data/repository/auth_repository.dart';
@@ -24,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
               ProfileCubit(getIt.get<ProfileRepository>())..getProfileData(),
         ),
         BlocProvider.value(
-         value: AuthCubit(getIt.get<AuthRepository>()),
+          value: AuthCubit(getIt.get<AuthRepository>()),
         ),
       ],
       child: Scaffold(
@@ -38,7 +39,9 @@ class ProfileScreen extends StatelessWidget {
               return Column(
                 children: [
                   ProfileDataContainer(studentData: state.studentData),
-                  SizedBox(height: 10.h,),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) {
                       if (state is SingOutDone) {
@@ -60,7 +63,7 @@ class ProfileScreen extends StatelessWidget {
                 ],
               );
             }
-            return Container();
+            return const ErrorText();
           },
         ),
       ),

@@ -21,15 +21,15 @@ class QuestionScreen extends StatelessWidget {
             ..getAllQuestions(quizId: quiz.quizId),
         ),
       ],
-      child: const Scaffold(
-        appBar: CustomAppBar(
+      child: Scaffold(
+        appBar: const CustomAppBar(
           text: 'الأسئلة',
           onPressed: null,
           actions: [
             TimerContainer(),
           ],
         ),
-        body: QuestionCard(),
+        body: QuestionCard(quiz:quiz),
       ),
     );
   }

@@ -30,15 +30,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _universityIdController = TextEditingController();
   @override
-  void dispose() {
-    super.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _nameController.dispose();
-    _passwordController.dispose();
-  }
-  dynamic level;
-  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthCubit(
