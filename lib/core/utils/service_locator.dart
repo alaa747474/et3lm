@@ -10,6 +10,6 @@ GetIt getIt=GetIt.instance;
 setUpServiceLocator(){
 getIt.registerSingleton<LectureRepository>(LectureRepository(FirebaseFirestore.instance));
 getIt.registerSingleton<ProfileRepository>(ProfileRepository(FirebaseFirestore.instance));
-getIt.registerSingleton<AuthRepository>(AuthRepository(FirebaseAuth.instance, FirebaseFirestore.instance));
+getIt.registerSingleton<AuthRepository>(AuthRepository(FirebaseAuth.instance,));
 getIt.registerSingleton<QuizRepository>(QuizRepository(FirebaseFirestore.instance));
 }

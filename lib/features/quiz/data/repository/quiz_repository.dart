@@ -32,10 +32,10 @@ class QuizRepository extends BaseQuizRepository {
 
   @override
   Future<void> saveQuizScoreToStudentResults(
-      {required QuizScore quizScore}) async {
+      {required QuizScore quizScore,required String uid}) async {
     await FirebaseFirestore.instance
         .collection(ConstantStrings.usersCollection)
-        .doc(currentUser!.uid)
+        .doc(uid)
         .collection(ConstantStrings.resultsCollection)
         .doc(quizScore.quizId)
         .set(quizScore.toMap());
@@ -45,9 +45,10 @@ class QuizRepository extends BaseQuizRepository {
   @override
   Future<void> addStudentUidToDEnteredQuizStudents({
     required String quizId,
+    required String uid
   }) async {
     List<String> studentsUid = [];
-    studentsUid.add(currentUser!.uid);
+    studentsUid.add(uid);
     await _firestore
         .collection(ConstantStrings.quizCollection)
         .doc(quizId)

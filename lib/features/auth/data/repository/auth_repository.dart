@@ -1,29 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_learning_app/core/constant/constants.dart';
 import 'package:e_learning_app/features/auth/data/model/user_model.dart';
 import 'package:e_learning_app/features/auth/data/repository/base_auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class AuthRepository extends BaseAuthRepository {
   final FirebaseAuth _auth;
-  final FirebaseFirestore _firestore;
+
   final User? currentUser = FirebaseAuth.instance.currentUser;
-  AuthRepository(this._auth, this._firestore);
+  AuthRepository(this._auth);
   @override
-  Future<void> createAccount({required UserModel userModel}) async {
+  Future<UserCredential> createAccount({required UserModel userModel}) async {
    UserCredential credential= await _auth.createUserWithEmailAndPassword(
         email: userModel.email, password: userModel.password);
-    if (credential.user != null) {
-      try {
-        await _firestore
-          .collection(ConstantStrings.usersCollection)
-          .doc(credential.user!.uid)
-          .set(userModel.toJson());
-      } catch (e) {
-        debugPrint(e.toString());
-      }
-    }
+        return credential;
   }
 
   @override

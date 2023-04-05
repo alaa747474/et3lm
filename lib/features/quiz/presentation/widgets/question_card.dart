@@ -6,6 +6,7 @@ import 'package:e_learning_app/core/widgets/loading_indicator.dart';
 import 'package:e_learning_app/features/quiz/business_logic/answers_cubit/answers_cubit.dart';
 import 'package:e_learning_app/features/quiz/data/model/quiz.dart';
 import 'package:e_learning_app/features/quiz/presentation/widgets/answers_listview.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +22,7 @@ class QuestionCard extends StatelessWidget {
     return BlocListener<AnswersCubit, AnswersState>(
       listener: (context, state) {
         if (state is QuizScoreLoaded) {
-          context.read<AnswersCubit>().saveQuizScoreToStudentResults(subjectName: quiz.subjectName, quizId: quiz.quizId);
+          context.read<AnswersCubit>().saveQuizScoreToStudentResults(subjectName: quiz.subjectName, quizId: quiz.quizId,uid: FirebaseAuth.instance.currentUser!.uid);
           Navigator.pushReplacementNamed(context, QuizScoreScreen.routeName,
               arguments: QuizScoreScreen(
                   quizScore: state.quizScore,

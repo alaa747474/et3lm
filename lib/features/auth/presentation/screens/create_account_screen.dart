@@ -1,5 +1,5 @@
+import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_learning_app/core/utils/padding_extension.dart';
 import 'package:e_learning_app/core/widgets/custom_appbar.dart';
 import 'package:e_learning_app/core/widgets/custom_button.dart';
@@ -29,11 +29,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _universityIdController = TextEditingController();
+  File? image;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthCubit(
-          AuthRepository(FirebaseAuth.instance, FirebaseFirestore.instance)),
+          AuthRepository(FirebaseAuth.instance,)),
       child: Scaffold(
         appBar: CustomAppBar(
             onPressed: () => Navigator.pop(context), text: 'إنشاء حساب'),
@@ -44,6 +45,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
                     if (state is ProfilePicPicked) {
+                      context.read<AuthCubit>().profilePic=state.profilePic;
                       context.read<AuthCubit>().getProfilePicUrl(
                           file: state.profilePic,
                           imagePath: 'profilPic${const Uuid().v1()}');
@@ -51,14 +53,24 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   },
                   builder: (context, state) {
                     if (state is ProfilePicPicked) {
-                      return Image.file(
-                        state.profilePic,
-                        width: 200,
-                        height: 200,
+                      image=state.profilePic;
+                     return CircleAvatar(
+                      radius: 50.r,
+                        backgroundImage: FileImage(context.read<AuthCubit>().profilePic!),
                       );
                     }
+                    if(state is ProfilePicUrlLoaded){
+                      return CircleAvatar(
+                      radius: 50.r,
+                        backgroundImage: FileImage(context.read<AuthCubit>().profilePic!),
+                      );
+                    }
+                    
                     if (state is AuthLoading) {
-                      return const LoadingIndicator();
+                      return CircleAvatar(
+                      radius: 50.r,
+                        backgroundImage: FileImage(context.read<AuthCubit>().profilePic!),
+                      );
                     }
 
                     return SelectProfilePicIcon(
@@ -74,11 +86,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     controller: _nameController,
                     icon: Icons.person),
                 CustomAuthTextField(
+                    keyboardType: TextInputType.number,
                     title: 'الرقم الجامعي',
                     hintText: '00000000',
                     controller: _universityIdController,
                     icon: Icons.person),
                 CustomAuthTextField(
+                    keyboardType: TextInputType.emailAddress,
                     title: 'البريد الإلكتروني',
                     hintText: 'البريد الإلكتروني',
                     controller: _emailController,
@@ -90,23 +104,28 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     controller: _passwordController,
                     icon: Icons.lock),
                 CustomAuthTextField(
+                    keyboardType: TextInputType.phone,
                     title: 'الهاتف',
                     hintText: 'رقم الهاتف المحمول',
                     controller: _phoneController,
                     icon: Icons.phone),
-                 
                 SizedBox(height: 20.h),
                 BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
+
+                    if (state is AuthFaild) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+                    }
                     if (state is CreateAccountDone) {
-                      Navigator.pushReplacementNamed(context,HomeScreen.routeName);
+                      Navigator.pushReplacementNamed(
+                          context, HomeScreen.routeName);
                     }
                   },
                   builder: (context, state) {
                     if (state is AuthLoading) {
                       return const LoadingIndicator();
                     }
-                   
+
                     return CustomButtom(
                         onPressed: () {
                           if (state is ProfilePicUrlLoaded) {
@@ -117,13 +136,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                 universityId: _universityIdController.text,
                                 phoneNumber: _phoneController.text,
                                 profilePic: state.profilePicUrl,
-                                level: '003'
-                                );
+                                level: '003');
                           }
                         },
                         text: 'إنشاء حساب');
                   },
-                )
+                ),
+                SizedBox(height: 20.h,),
               ],
             ),
           ),

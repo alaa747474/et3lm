@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_learning_app/core/constant/constants.dart';
 import 'package:e_learning_app/core/utils/padding_extension.dart';
 import 'package:e_learning_app/core/widgets/custom_appbar.dart';
@@ -13,12 +12,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../business_logic/cubit/auth_cubit.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
- static const String routeName='/sign_in_screen';
+  static const String routeName = '/sign_in_screen';
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
@@ -37,19 +37,18 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthCubit(
-          AuthRepository(FirebaseAuth.instance, FirebaseFirestore.instance)),
+          AuthRepository(FirebaseAuth.instance,)),
       child: Scaffold(
         appBar: const CustomAppBar(onPressed: null, text: 'تسجيل الدخول'),
         body: AppPadding(
           SingleChildScrollView(
             child: Column(
               children: [
-                Image.asset(
+                SvgPicture.asset(
                   ConstantStrings.authImage,
-                  height: 270.h,
-                 
+                  height: 280.h,
+                  width: double.maxFinite,
                 ),
-              
                 CustomAuthTextField(
                     title: 'البريد الإلكتروني',
                     hintText: 'البريد الإلكتروني',
@@ -65,12 +64,15 @@ class _SignInScreenState extends State<SignInScreen> {
                 BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
                     if (state is SingInDone) {
-                      Navigator.pushReplacementNamed(context,HomeScreen.routeName);
+                      Navigator.pushReplacementNamed(
+                          context, HomeScreen.routeName);
                     }
                   },
                   builder: (context, state) {
                     if (state is AuthFaild) {
-                      return ErrorText(text: state.error,);
+                      return ErrorText(
+                        text: state.error,
+                      );
                     }
                     if (state is AuthLoading) {
                       return const LoadingIndicator();

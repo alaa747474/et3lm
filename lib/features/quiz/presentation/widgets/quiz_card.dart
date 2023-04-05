@@ -88,7 +88,7 @@ class QuizCard extends StatelessWidget {
           ),
           quiz.enteredQuizStudents!
                   .contains(FirebaseAuth.instance.currentUser!.uid)
-              ? Text('لقد قمت بالإنتهاء من الاختبار !',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.red),)
+              ? Text('لقد انتهيت من اداء الاختبار !',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.red),)
               : Padding(
                   padding: EdgeInsets.symmetric(vertical: 5.h),
                   child: CustomButtom(
@@ -98,7 +98,7 @@ class QuizCard extends StatelessWidget {
                         context
                             .read<AnswersCubit>()
                             .addStudentUidToDEnteredQuizStudents(
-                                quizId: quiz.quizId);
+                                quizId: quiz.quizId,uid: FirebaseAuth.instance.currentUser!.uid);
                       },
                       text: 'إبدأ الأن'),
                 )

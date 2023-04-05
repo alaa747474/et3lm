@@ -69,15 +69,15 @@ class AnswersCubit extends Cubit<AnswersState> {
   }
 
   void saveQuizScoreToStudentResults(
-      {required String subjectName, required String quizId}) {
+      {required String subjectName, required String quizId,required String uid}) {
     QuizScore quizScoreModel =
         QuizScore(quizScore, answersList!.length, subjectName, quizId);
-    _quizRepository.saveQuizScoreToStudentResults(quizScore: quizScoreModel);
+    _quizRepository.saveQuizScoreToStudentResults(quizScore: quizScoreModel,uid: uid);
   }
 
   void addStudentUidToDEnteredQuizStudents(
-      {required String quizId,}) {
+      {required String quizId,required String uid}) {
     _quizRepository.addStudentUidToDEnteredQuizStudents(
-        quizId: quizId, );
+        quizId: quizId,uid: uid );
   }
 }

@@ -9,17 +9,23 @@ class SubjectContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.circular(35.r),
-        //  boxShadow: [BoxShadow(color: Theme.of(context).primaryColor, spreadRadius: 1.5.r)]
-          ),
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(35.r),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.network(subject.image,width: 80.w,height: 80.h,),
-          Text(subject.name,style: Theme.of(context).textTheme.titleLarge,)
+          Image.network(
+            subject.image,
+            width: 80.w,
+            height: 80.h,
+          ),
+          Text(
+            subject.name,
+            style: Theme.of(context).textTheme.titleLarge,
+          )
         ],
-      ),    
+      ),
     );
   }
 }
