@@ -18,7 +18,8 @@ class QuizzesResultsScreen extends StatefulWidget {
 class _QuizzesResultsScreenState extends State<QuizzesResultsScreen> {
   @override
   void initState() {
-    context.read<ProfileCubit>().getAllQuizzesResults(uid: context.read<ProfileCubit>().getCurrentUserUid());
+    context.read<ProfileCubit>().getAllQuizzesResults(
+        uid: context.read<ProfileCubit>().getCurrentUserUid());
     super.initState();
   }
 
@@ -28,10 +29,12 @@ class _QuizzesResultsScreenState extends State<QuizzesResultsScreen> {
         appBar: CustomAppBar(
             text: 'النتائج',
             onPressed: () {
-              context.read<ProfileCubit>().getProfileData(uid:  context.read<ProfileCubit>().getCurrentUserUid());
+              //context.read<ProfileCubit>().getProfileData(uid:  context.read<ProfileCubit>().getCurrentUserUid());
               Navigator.pop(context);
             }),
         body: BlocBuilder<ProfileCubit, ProfileState>(
+          buildWhen: (previous, current) =>
+              (current != previous && current is QuizzesResultsLoaded),
           builder: (context, state) {
             if (state is ProfileDataLoading) {
               return const LoadingIndicator();
@@ -40,26 +43,37 @@ class _QuizzesResultsScreenState extends State<QuizzesResultsScreen> {
               return ListView.builder(
                 itemCount: state.quizzesResults.length,
                 itemBuilder: (BuildContext context, int index) {
-                      double quizPercentage = state.quizzesResults[index].score / state.quizzesResults[index].total * 100;
+                  double quizPercentage = state.quizzesResults[index].score /
+                      state.quizzesResults[index].total *
+                      100;
 
                   return ProfileDataContainer(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('المادة : ${state.quizzesResults[index].subjectName}',style: Theme.of(context).textTheme.titleLarge,),
-                              Text(
-                                  'الدرجة : ${state.quizzesResults[index].score.toInt()}/${state.quizzesResults[index].total.toInt()}'
-                                  ,style: Theme.of(context).textTheme.titleLarge,
-                                  ),
-                              Text('النسبة المئوية : ${quizPercentage.toInt()}%',style: Theme.of(context).textTheme.titleLarge,),
-                            ],
+                          Text(
+                            'المادة : ${state.quizzesResults[index].subjectName}',
+                            style: Theme.of(context).textTheme.titleLarge,
                           ),
-                          Image.network(ConstantStrings.quizResultImage,width: 110.w,),
+                          Text(
+                            'الدرجة : ${state.quizzesResults[index].score.toInt()}/${state.quizzesResults[index].total.toInt()}',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          Text(
+                            'النسبة المئوية : ${quizPercentage.toInt()}%',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
                         ],
-                      ));
+                      ),
+                      Image.network(
+                        ConstantStrings.quizResultImage,
+                        width: 110.w,
+                      ),
+                    ],
+                  ));
                 },
               );
             }

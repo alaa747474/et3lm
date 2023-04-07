@@ -14,15 +14,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../business_logic/quiz_cubit/quiz_cubit.dart';
 import '../screens/quiz_score_screen.dart';
 
-class QuestionCard extends StatelessWidget {
+class QuestionCard extends StatefulWidget {
   const QuestionCard({super.key,required this.quiz});
   final Quiz quiz;
+
+  @override
+  State<QuestionCard> createState() => _QuestionCardState();
+}
+
+class _QuestionCardState extends State<QuestionCard> {
+  @override
+  void initState() {
+    context.read<QuizCubit>().preventScreenshot();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocListener<AnswersCubit, AnswersState>(
       listener: (context, state) {
         if (state is QuizScoreLoaded) {
-          context.read<AnswersCubit>().saveQuizScoreToStudentResults(subjectName: quiz.subjectName, quizId: quiz.quizId,uid: FirebaseAuth.instance.currentUser!.uid);
+          context.read<AnswersCubit>().saveQuizScoreToStudentResults(subjectName: widget.quiz.subjectName, quizId: widget.quiz.quizId,uid: FirebaseAuth.instance.currentUser!.uid);
           Navigator.pushReplacementNamed(context, QuizScoreScreen.routeName,
               arguments: QuizScoreScreen(
                   quizScore: state.quizScore,

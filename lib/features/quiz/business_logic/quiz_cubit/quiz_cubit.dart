@@ -4,6 +4,7 @@ import 'package:e_learning_app/features/quiz/data/model/question.dart';
 import 'package:e_learning_app/features/quiz/data/model/quiz.dart';
 import 'package:e_learning_app/features/quiz/data/repository/quiz_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 
 part 'quiz_state.dart';
 
@@ -41,8 +42,7 @@ class QuizCubit extends Cubit<QuizState> {
           ).toUtc(),
         );
   }
-
-  void getAllQuizzesResults() async {
-
+ void preventScreenshot()async{
+    await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
   }
 }

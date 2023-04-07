@@ -27,7 +27,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  double padValue = 100;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

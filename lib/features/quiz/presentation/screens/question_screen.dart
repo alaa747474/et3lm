@@ -14,11 +14,12 @@ class QuestionScreen extends StatelessWidget {
   static const String routeName = '/question_screen';
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => QuizCubit(getIt.get<QuizRepository>())
-            ..getAllQuestions(quizId: quiz.quizId),
+            ..getAllQuestions(quizId: quiz.quizId)
         ),
       ],
       child: Scaffold(
